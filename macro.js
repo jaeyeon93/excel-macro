@@ -1,19 +1,11 @@
 const xlsl = require('xlsx');
-
 const test_file = xlsl.readFile('./test.xlsx');
-
 const sheets = test_file.SheetNames;
-
-// console.log(test_file.Props);
-// console.log(test_file.Workbook);
-
 const dec = sheets[13];
-
-console.log(dec);
 
 const worksheet = test_file.Sheets[dec];
 
-console.log(worksheet.A1);
+// console.log(worksheet.A1);
 
 // { t: 's',
 //   v: '삼일교회 청년 1부 현금 출납부  (2019.12월-1)',
@@ -24,3 +16,10 @@ console.log(worksheet.A1);
 // h field는 Parse rich text and save HTML
 // w field는 generate formatted text
 // f : save formulae to f field
+
+const getDate = (worksheet, num) => {
+    const value = `B${num}`;
+    return worksheet[value];
+};
+
+getDate(worksheet, 5);
