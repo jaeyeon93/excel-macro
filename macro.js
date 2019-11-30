@@ -71,5 +71,18 @@ const getTotalData = (worksheet, num) => {
     return result;
 };
 
-const result = getTotalData(worksheet, 7);
-console.log(result);
+const setDate = (worksheet, num, data) => {
+    const value = `B${num}`;
+    worksheet[value].w = data;
+    worksheet[value].v = data;
+    worksheet[value].h = data;
+    xlsl.writeFile(worksheet, 'hello.xlsx');
+    return worksheet[value];
+};
+
+// const result = getTotalData(worksheet, 5);
+// console.log(result);
+console.log(`current`);
+console.log(getDate(worksheet, 6));
+console.log(`after change`);
+console.log(setDate(worksheet, 6, 22));
