@@ -22,4 +22,54 @@ const getDate = (worksheet, num) => {
     return worksheet[value];
 };
 
-getDate(worksheet, 5);
+const getDescription = (worksheet, num) => {
+    const value = `B${num}`;
+    return worksheet[value];
+};
+
+const getPerson = (worksheet, num) => {
+    const value = `C${num}`;
+    return worksheet[value];
+};
+
+const getIncome = (worksheet, num) => {
+    const value = `E${num}`;
+    return worksheet[value];
+};
+
+const getOutcome = (worksheet, num) => {
+    const value = `F${num}`;
+    return worksheet[value];
+};
+
+const getReceiptNumber = (worksheet, num) => {
+    const value = `J${num}`;
+    console.log(worksheet[value]);
+    return worksheet[value];
+};
+
+const getInputOutput = (worksheet, num) => {
+    const value = `L${num}`;
+    return worksheet[value];
+};
+
+const getPurpose = (worksheet, num) => {
+    const value = `M${num}`;
+    return worksheet[value];
+};
+
+const getTotalData = (worksheet, num) => {
+    let result = {};
+    result.date = getDate(worksheet, num).w;
+    result.description = getDescription(worksheet, num).w;
+    result.person = getPerson(worksheet, num).w;
+    result.income = getIncome(worksheet, num).w;
+    result.outcome = getOutcome(worksheet, num).w;
+    result.receiptNumber = getReceiptNumber(worksheet, num).w;
+    result.inputOutput = getInputOutput(worksheet, num).w;
+    result.purpose = getPurpose(worksheet, num).w;
+    return result;
+};
+
+const result = getTotalData(worksheet, 7);
+console.log(result);
