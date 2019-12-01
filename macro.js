@@ -1,7 +1,7 @@
 const xlsl = require('xlsx');
 const test_file = xlsl.readFile('./test.xlsx');
 const sheets = test_file.SheetNames;
-const dec = sheets[13];
+const dec = sheets[4];
 
 const worksheet = test_file.Sheets[dec];
 
@@ -19,43 +19,50 @@ const worksheet = test_file.Sheets[dec];
 
 const getDate = (worksheet, num) => {
     const value = `B${num}`;
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getDescription = (worksheet, num) => {
-    const value = `B${num}`;
-    return worksheet[value];
+    const value = `C${num}`;
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getPerson = (worksheet, num) => {
-    const value = `C${num}`;
-    return worksheet[value];
+    const value = `D${num}`;
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getIncome = (worksheet, num) => {
     const value = `E${num}`;
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getOutcome = (worksheet, num) => {
     const value = `F${num}`;
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getReceiptNumber = (worksheet, num) => {
     const value = `J${num}`;
-    console.log(worksheet[value]);
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getInputOutput = (worksheet, num) => {
     const value = `L${num}`;
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getPurpose = (worksheet, num) => {
     const value = `M${num}`;
-    return worksheet[value];
+    if (checkUndefined(worksheet, value))
+        return worksheet[value];
 };
 
 const getTotalData = (worksheet, num) => {
@@ -71,8 +78,20 @@ const getTotalData = (worksheet, num) => {
     return result;
 };
 
+const checkUndefined = (worksheet, value) => {
+    if (typeof worksheet[value] != 'undefined')
+        return true;
+    return false;
+};
+
+const checkValidField = (worksheet, num) => {
+    if (getDate(worksheet, num) == undefined && getDescription(worksheet, num) == undefined && getPerson(worksheet, num) == undefined && getIncome(worksheet, num) == undefined && getOutcome(worksheet, num) == undefined && getInputOutput(worksheet, num) == undefined && getPurpose(worksheet, num) == undefined && getReceiptNumber(worksheet, num) == undefined) {
+        return true;
+    }
+    return false;
+};
+
 const setDate = (worksheet, num, data) => {
-    const value = `B${num}`;
     worksheet[value].w = data;
     worksheet[value].v = data;
     worksheet[value].h = data;
@@ -80,9 +99,10 @@ const setDate = (worksheet, num, data) => {
     return worksheet[value];
 };
 
-// const result = getTotalData(worksheet, 5);
-// console.log(result);
-console.log(`current`);
-console.log(getDate(worksheet, 6));
-console.log(`after change`);
-console.log(setDate(worksheet, 6, 22));
+for (let i = 1; i < 91; i++)
+    if (checkValidField(worksheet, i)) {
+        console.log(`${i} 에서 참`);
+    }
+
+// console.log(getTotalData(worksheet, 90));
+// console.log(checkValidField(worksheet, 90));
